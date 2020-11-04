@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="jquery-3.5.1.min.js"></script>
+    <title>React</title>
+</head>
+
+<body>
+    <div id="example"></div>
+
+    <script type="text/babel">
+        //ReactDOM.render方法接受两个参数：一个虚拟 DOM 节点和一个真实 DOM 节点，作用是将虚拟 DOM 挂载到真实 DOM
+        // ReactDOM.render(
+        //     <span>Hello React</span>,
+        //     document.getElementById("example")
+        // )
+        
+        //React 组件语法
+        // /class MyTitle extends React.Component是 ES6 语法，表示自定义一个MyTitle类，该类继承了基类React.Component的所有属性和方法。
+        //React 规定，自定义组件的第一个字母必须大写，比如MyTitle不能写成myTitle，以便与内置的原生类相区分。
+        // class MyTitle extends React.Component{
+        //     render(){
+        //         //组件的参数a
+        //         return <div style={{color:this.props.color}}>Hello React</div>
+        //     }
+        // };
+        // //每个组件都必须有render方法，定义输出的样式。
+        //<MyTitle/>表示生成一个组件类的实例，每个实例一定要有闭合标签
+        // ReactDOM.render(
+        //     <MyTitle color="red" />,
+        //     document.getElementById("example")
+        // )
+
+        
+        ///React 组件的状态
+        class MyReact extends React.Component{
+
+            //constructor是组件的构造函数，会在创建实例时自动调用。
+            //...args表示组件参数，super(...args)是 ES6 规定的写法。this.state对象用来存放内部状态，这里是定义初始状态
+            constructor(...args){
+                super(...args);
+                this.state={
+                    name:"77"
+                };
+            }
+
+            handleChange(e){
+                let name=e.target.value;
+                //this.setState方法用来重置this.state，每次调用这个方法，就会引发组件的重新渲染。
+                this.setState({
+                    name:name
+                });
+            }
+
+            render(){
+                //this.state.name表示读取this.state的name属性。每当输入框有变动，就会自动调用onChange指定的监听函数，
+                //这里是this.handleChange，.bind(this)表示该方法内部的this，绑定当前组件。
+                return <div>
+                            <input type="text" onChange={this.handleChange.bind(this)}/>
+                            <p>你好,{this.state.name}</p>
+                        </div>;
+            }
+        };
+        ReactDOM.render(
+            <MyReact/>,
+            document.getElementById("example")
+        )
+
+//     class MyList extends React.Component {
+//     constructor(...args) {
+//       super(...args);
+//       this.state = {
+//         loading: true,
+//         error: null,
+//         data: null
+//       };
+//     }
+
+//     componentDidMount() {
+//       const url = 'https://api.github.com/search/repositories?q=javascript&sort=stars';
+//       $.getJSON(url)
+//        .done(
+//         (value) => this.setState({
+//           loading: false,
+//           data: value
+//         })
+//       ).fail(
+//         (jqXHR, textStatus) => this.setState({
+//           loading: false,
+//           error: jqXHR.status
+//         })
+//       );
+//     }
+
+//     render() {
+//       if (this.state.loading) {
+//         return <span>Loading...</span>;
+//       } else if (this.state.error !== null) {
+//         return <span>Error: {this.state.error}</span>;
+//       } else {
+        
+//         return (
+//           <div>
+//             <p>API 数据获取成功</p>
+//             <p>{this.state.name}</p>
+//           </div>
+//         );
+//       }
+//     }
+//   };
+
+//   ReactDOM.render(
+//     <MyList/>,
+//     document.getElementById('example')
+//   );
+
+
+
+        
+    </script>
+</body>
+
+</html>
